@@ -8,7 +8,7 @@ import (
 
 func TestRouter(t *testing.T) {
 	w := httptest.NewRecorder()
-	req := httptest.NewRequest(http.MethodGet, "/health", nil)
+	req := httptest.NewRequest(http.MethodGet, "/healthz", nil)
 	router().ServeHTTP(w, req)
 
 	expected := "Hello, world!"

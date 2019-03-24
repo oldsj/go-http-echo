@@ -1,40 +1,24 @@
 package main
 
 import (
-    "net/http"
-    "os"
     "log"
+    "net/http"
+
+    "github.com/gorilla/mux"
 )
 
-// DefaultPort is the default port to use if once is not specified by the SERVER_PORT environment variable
-const DefaultPort = "8000";
-
-func getServerPort() (string) {
-    port := os.Getenv("SERVER_PORT");
-    if port != "" {
-        return port;
-    }
-
-    return DefaultPort;
-}
-
-// EchoHandler echos back the request as a response
-func EchoHandler(writer http.ResponseWriter, request *http.Request) {
-
-    log.Println("Echoing back request made to " + request.URL.Path + " to client (" + request.RemoteAddr + ")")
-
-    writer.Header().Set("Access-Control-Allow-Origin", "*")
-
-    // allow pre-flight headers
-    writer.Header().Set("Access-Control-Allow-Headers", "Content-Range, Content-Disposition, Content-Type, ETag")
-
-    request.Write(writer)
-}
+var port = "8080"
 
 func main() {
+    log.Fatal(http.ListenAndServe(":"+port, router()))
+}
 
-    log.Println("Starting server on port " + getServerPort())
+func router() http.Handler {
+    r := mux.NewRouter()
+    r.Path("/greeting").Methods(http.MethodGet).HandlerFunc(greet)
+    return r
+}
 
-    http.HandleFunc("/", EchoHandler)
-    http.ListenAndServe(":" + getServerPort(), nil)
+func greet(w http.ResponseWriter, req *http.Request) {
+    _, _ = w.Write([]byte("Hello, world!"))
 }

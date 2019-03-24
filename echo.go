@@ -15,7 +15,7 @@ func main() {
 
 func router() http.Handler {
     r := mux.NewRouter()
-    r.Path("/greeting").Methods(http.MethodGet).HandlerFunc(greet)
+    r.Path("/healthz").Methods(http.MethodGet).HandlerFunc(greet)
     return r
 }
 

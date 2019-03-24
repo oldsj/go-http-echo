@@ -11,7 +11,7 @@ func TestRouter(t *testing.T) {
 	req := httptest.NewRequest(http.MethodGet, "/healthz", nil)
 	router().ServeHTTP(w, req)
 
-	expected := "Hello, world!"
+	expected := "Hello, world! Lets try somethin else"
 	actual := w.Body.String()
 	if expected != actual {
 		t.Fatalf("Expected %s but got %s", expected, actual)

@@ -20,5 +20,5 @@ func router() http.Handler {
 }
 
 func greet(w http.ResponseWriter, req *http.Request) {
-    _, _ = w.Write([]byte("Hello, world!"))
+    _, _ = w.Write([]byte("Hello, world! Lets try somethin else"))
 }

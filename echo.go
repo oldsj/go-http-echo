@@ -7,7 +7,7 @@ import (
     "github.com/gorilla/mux"
 )
 
-var port = "8080"
+var port = "5000"
 
 func main() {
     log.Fatal(http.ListenAndServe(":"+port, router()))

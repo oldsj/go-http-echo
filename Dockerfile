@@ -8,4 +8,3 @@ FROM scratch
 COPY --from=builder /build/main /app/
 WORKDIR /app
 CMD ["./main"]
-
